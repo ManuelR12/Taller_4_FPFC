@@ -1,48 +1,54 @@
-// Ejemplo de pruebas.sc
 import Anagramas._
 
+// -------------------------------
+// Pruebas de lOcPal
+// -------------------------------
+lOcPal("Casa")               // Esperado: List(('a', 2), ('c', 1), ('s', 1))
+lOcPal("moco")               // Esperado: List(('c', 1), ('m', 1), ('o', 2))
 
+// -------------------------------
+// Pruebas de lOcFrase
+// -------------------------------
+lOcFrase(List("El", "Sol"))  // Esperado: List(('e', 1), ('l', 2), ('o', 1), ('s', 1))
+lOcFrase(List("yo", "y"))    // Esperado: List(('o', 1), ('y', 2))
 
-println("--- Pruebas lOcPal ---")
-println(lOcPal("Scala")) 
-println(lOcPal(""))      
-println(lOcPal("repetido")) 
+// -------------------------------
+// Pruebas de diccionarioPorOcurrencias
+// -------------------------------
+diccionarioPorOcurrencias    // Imprime el mapa completo agrupando por ocurrencias
 
-println("\n--- Pruebas lOcFrase ---")
-val frase1 = List("Hola", "Scala")
-println(lOcFrase(frase1)) 
-val fraseVacia = List[String]()
-println(lOcFrase(fraseVacia)) 
+// -------------------------------
+// Pruebas de anagramasDePalabra
+// -------------------------------
+anagramasDePalabra("ocasos") // Puede devolver List("cosas", "ocasos")
+anagramasDePalabra("moco")   // Puede devolver List("moco", "como") dependiendo del diccionario
 
-println("\n--- Diccionario por Ocurrencias (parcial) ---")
+// -------------------------------
+// Pruebas de combinaciones
+// -------------------------------
+combinaciones(List(('a', 2), ('b', 1)))
+/*
+Esperado (orden no importa):
+List(
+  List(), 
+  List(('a', 1)), 
+  List(('a', 2)), 
+  List(('b', 1)), 
+  List(('a', 1), ('b', 1)), 
+  List(('a', 2), ('b', 1))
+)
+*/
 
-println(diccionarioPorOcurrencias.get(lOcPal("cosas")))
-println(diccionarioPorOcurrencias.get(lOcPal("moco"))) 
+// -------------------------------
+// Pruebas de complemento
+// -------------------------------
+complemento(
+  List(('a', 2), ('b', 1), ('c', 1)),
+  List(('a', 1), ('c', 1))
+) // Esperado: List(('a', 1), ('b', 1))
 
-println("\n--- Pruebas anagramasDePalabra ---")
-println(anagramasDePalabra("roca")) 
-println(anagramasDePalabra("como")) 
-println(anagramasDePalabra("ocasos")) 
-
-println("\n--- Pruebas combinaciones ---")
-val occ1 = List(('a', 2), ('b', 1))
-println(s"Combinaciones de $occ1:")
-combinaciones(occ1).foreach(println)
-
-println("\n--- Pruebas complemento ---")
-val lOcTotal = List(('a', 2), ('b', 2), ('c', 1))
-val slOcParcial = List(('a', 1), ('b', 2))
-println(s"Complemento de $lOcTotal menos $slOcParcial:")
-println(complemento(lOcTotal, slOcParcial)) 
-
-println("\n--- Pruebas anagramasDeFrase ---")
-val fraseAnagrama = List("Hola", "Sol")
-val fraseFacil = List("Sol", "Ala")
-// Anagramas: List("sol", "ala"), List("ala", "sol"), List("los", "ala"), List("ala", "los"), List("sal", "ola"), List("ola", "sal"), ...
-println(s"Anagramas de $fraseFacil:")
-anagramasDeFrase(fraseFacil).foreach(println)
-
-// Prueba del PDF:
-// val frasePDF = List("cosas", "como", "yo")
-// println(s"Anagramas de $frasePDF:")
-// anagramasDeFrase(frasePDF).foreach(println) // Usar el diccionario del PDF para esta prueba
+// -------------------------------
+// Pruebas de anagramasDeFrase
+// -------------------------------
+val frase = List("cosas", "como", "yo")
+anagramasDeFrase(frase) // Ej: List(List("yo", "como", "cosas"), List("cayo", "mocosos"), ...)
