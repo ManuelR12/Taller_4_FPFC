@@ -30,11 +30,11 @@ combinaciones(List(('a', 2), ('b', 1)))
 /*
 Esperado (orden no importa):
 List(
-  List(), 
-  List(('a', 1)), 
-  List(('a', 2)), 
-  List(('b', 1)), 
-  List(('a', 1), ('b', 1)), 
+  List(),
+  List(('a', 1)),
+  List(('a', 2)),
+  List(('b', 1)),
+  List(('a', 1), ('b', 1)),
   List(('a', 2), ('b', 1))
 )
 */

@@ -4,11 +4,11 @@ package object Anagramas {
 
   type Palabra = String
   type Frase = List[Palabra]
-  type Occurrencias = List[(Char, Int)]
+  type Ocurrencias = List[(Char, Int)]
 
   val diccionario: List[Palabra] = List("cosas", "como", "yo", "y", "ocasos", "oca", "cayo", "mocosos", "roca", "moco", "sos")
 
-  def lOcPal(p: Palabra): Occurrencias = {
+  def lOcPal(p: Palabra): Ocurrencias = {
     p.toLowerCase
       .groupBy(identity)
       .map { case (char, occurrences) => (char, occurrences.length) }
@@ -16,12 +16,12 @@ package object Anagramas {
       .sorted
   }
 
-  def lOcFrase(f: Frase): Occurrencias = {
+  def lOcFrase(f: Frase): Ocurrencias = {
     val fraseCompleta = f.mkString("")
     lOcPal(fraseCompleta)
   }
 
-  lazy val diccionarioPorOcurrencias: Map[Occurrencias, List[Palabra]] = {
+  lazy val diccionarioPorOcurrencias: Map[Ocurrencias, List[Palabra]] = {
     diccionario.groupBy(lOcPal)
   }
 
@@ -30,7 +30,7 @@ package object Anagramas {
     diccionarioPorOcurrencias.getOrElse(ocurrenciasPalabra, Nil)
   }
 
-  def combinaciones(lOcurrencias: Occurrencias): List[Occurrencias] = {
+  def combinaciones(lOcurrencias: Ocurrencias): List[Ocurrencias] = {
     lOcurrencias match {
       case Nil => List(List())
       case (char, count) :: rest =>
@@ -49,9 +49,9 @@ package object Anagramas {
     }
   }
 
-  def complemento(lOc: Occurrencias, slOc: Occurrencias): Occurrencias = {
+  def complemento(lOc: Ocurrencias, slOc: Ocurrencias): Ocurrencias = {
     @tailrec
-    def loop(remL1: Occurrencias, remL2: Occurrencias, builtAccRev: Occurrencias): Occurrencias = (remL1, remL2) match {
+    def loop(remL1: Ocurrencias, remL2: Ocurrencias, builtAccRev: Ocurrencias): Ocurrencias = (remL1, remL2) match {
       case (Nil, _) => builtAccRev.reverse
       case (l1, Nil) => builtAccRev.reverse ++ l1
 
@@ -76,7 +76,7 @@ package object Anagramas {
   def anagramasDeFrase(frase: Frase): List[Frase] = {
     val fraseOcc = lOcFrase(frase)
 
-    def encontrarAnagramasRec(ocurrenciasRestantes: Occurrencias): List[Frase] = {
+    def encontrarAnagramasRec(ocurrenciasRestantes: Ocurrencias): List[Frase] = {
 
       if (ocurrenciasRestantes.isEmpty) {
         List(List())
