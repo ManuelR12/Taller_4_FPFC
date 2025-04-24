@@ -66,7 +66,7 @@ package object Anagramas {
           } else {
             loop(t1, t2, builtAccRev)
           }
-        } else { // c1 > c2
+        } else {
           loop(remL1, t2, builtAccRev)
         }
     }
